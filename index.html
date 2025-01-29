@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Abstract Clock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -13,6 +14,7 @@
             margin: 0;
             background: #000000;
             font-family: 'Montserrat', sans-serif;
+            font-weight: 900; /* Extra-bold weight */
             flex-direction: column;
         }
 
@@ -27,7 +29,7 @@
         .button {
             padding: 12px 30px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 900; /* Extra-bold weight */
             color: white;
             border: 2px solid white;
             border-radius: 32px;
@@ -78,7 +80,7 @@
         svg {
             position: absolute;
             font-size: 200px;
-            font-weight: bold;
+            font-weight: 900; /* Extra-bold weight */
             fill: white;
             pointer-events: none;
         }
@@ -101,7 +103,7 @@
 
         .text-bottom span {
             color: rgb(143, 0, 255); /* Viola acceso per "create" */
-            font-weight: bold;
+            font-weight: 900; /* Extra-bold weight */
             font-style: italic;
         }
 
@@ -133,7 +135,7 @@
         function setup() {
             createCanvas(windowWidth, windowHeight);
             textFont('Montserrat');
-            textSize(96);
+            textSize(200);
             textAlign(CENTER, CENTER);
 
             // Initialize numbers with random positions

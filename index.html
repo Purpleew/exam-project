@@ -13,15 +13,42 @@
             margin: 0;
             background: #000000;
             font-family: 'Montserrat', sans-serif;
+            flex-direction: column;
+        }
+
+        /* Button container at the top-right with margin */
+        .button-container {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 10;
+        }
+
+        .button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border: 2px solid white;
+            border-radius: 32px;
+            background-color: transparent;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .clock {
             position: relative;
             width: 100%;
-            height: calc(100vh - 120px); /* Adjusted height to leave space for text below (80px) + margin (40px) */
+            height: 100vh; /* Ensure full height */
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden; /* Hide any potential overflow */
         }
 
         .hand {
@@ -50,7 +77,7 @@
 
         svg {
             position: absolute;
-            font-size: 96px;
+            font-size: 200px;
             font-weight: bold;
             fill: white;
             pointer-events: none;
@@ -62,7 +89,7 @@
             justify-content: center;
             width: 100%;
             position: absolute;
-            bottom: 0;
+            bottom: 40px; /* Adjust bottom distance */
         }
 
         .text-bottom {
@@ -81,6 +108,11 @@
     </style>
 </head>
 <body>
+    <!-- Button container in top-right corner -->
+    <div class="button-container">
+        <button class="button">Plan with me</button>
+    </div>
+
     <div class="clock">
         <div class="hand" id="hour-hand"></div>
         <div class="hand" id="minute-hand"></div>

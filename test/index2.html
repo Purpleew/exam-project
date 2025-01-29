@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="hero">
+    <div id="clock-container">
+      <svg id="clock-svg" width="400" height="400" viewBox="0 0 400 400">
+        <!-- SVG for numbers -->
+        <text id="number-12" x="50%" y="10%" text-anchor="middle" font-size="24" fill="black">12</text>
+        <text id="number-3" x="90%" y="50%" text-anchor="middle" font-size="24" fill="black">3</text>
+        <text id="number-6" x="50%" y="90%" text-anchor="middle" font-size="24" fill="black">6</text>
+        <text id="number-9" x="10%" y="50%" text-anchor="middle" font-size="24" fill="black">9</text>
+        <!-- More numbers could be added similarly -->
+      </svg>
+      <canvas id="p5-canvas"></canvas>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/matter-js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

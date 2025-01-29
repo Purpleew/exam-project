@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Abstract Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #000000;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .clock {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .hand {
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 50%;
+            transform: rotate(90deg);
+        }
+
+        #hour-hand {
+            background: white;
+            height: 6px;
+        }
+
+        #minute-hand {
+            background: white;
+            height: 4px;
+        }
+
+        #second-hand {
+            background: red;
+        }
+
+        svg {
+            position: absolute;
+            font-size: 96px;
+            font-weight: bold;
+            fill: white;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="hand" id="hour-hand"></div>
+        <div class="hand" id="minute-hand"></div>
+        <div class="hand" id="second-hand"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <script>
+        let numbers = [];
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            textFont('Montserrat');
+            textSize(96);
+            textAlign(CENTER, CENTER);
+
+            // Initialize numbers with random positions
+            for (let i = 1; i <= 12; i++) {
+                numbers.push({
+                    value: i,
+                    x: random(width),
+                    y: random(height),
+                    vx: random(-1, 1),
+                    vy: random(-1, 1),
+                });
+            }
+        }
+
+        function draw() {
+            clear();
+
+            // Draw moving numbers
+            for (let num of numbers) {
+                num.x += num.vx;
+                num.y += num.vy;
+
+                // Bounce numbers off walls
+                if (num.x < 0 || num.x > width) num.vx *= -1;
+                if (num.y < 0 || num.y > height) num.vy *= -1;
+
+                fill(255);
+                text(num.value, num.x, num.y);
+            }
+
+            // Draw clock hands
+            const now = new Date();
+            const romeTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Rome" }));
+
+            const seconds = romeTime.getSeconds();
+            const minutes = romeTime.getMinutes();
+            const hours = romeTime.getHours();
+
+            const secondAngle = radians((seconds / 60) * 360 - 90);
+            const minuteAngle = radians((minutes / 60) * 360 - 90);
+            const hourAngle = radians(((hours % 12) / 12) * 360 - 90 + (minutes / 60) * 30);
+
+            strokeWeight(6);
+
+            // Hour hand
+            stroke(255);
+            line(width / 2, height / 2, width / 2 + cos(hourAngle) * 100, height / 2 + sin(hourAngle) * 100);
+
+            // Minute hand
+            strokeWeight(4);
+            line(width / 2, height / 2, width / 2 + cos(minuteAngle) * 150, height / 2 + sin(minuteAngle) * 150);
+
+            // Second hand
+            stroke(255, 0, 0);
+            strokeWeight(2);
+            line(width / 2, height / 2, width / 2 + cos(secondAngle) * 180, height / 2 + sin(secondAngle) * 180);
+
+            noStroke();
+
+            // Interactivity: Numbers react to the mouse
+            for (let num of numbers) {
+                if (dist(mouseX, mouseY, num.x, num.y) < 50) {
+                    num.vx += random(-0.5, 0.5);
+                    num.vy += random(-0.5, 0.5);
+                }
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+    </script>
+</body>
+</html>
